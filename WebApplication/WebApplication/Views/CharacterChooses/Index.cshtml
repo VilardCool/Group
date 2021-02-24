@@ -1,0 +1,41 @@
+﻿@model IEnumerable<WebApplication.CharacterChoose>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Вибір персонажа</h1>
+
+<p>
+    <a asp-action="Create">Встановити зв'язок</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Character)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Player)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Character.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Player.Nickname)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

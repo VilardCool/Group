@@ -130,6 +130,11 @@ namespace WebApplication.Controllers
                 return NotFound();
             }
 
+            if (_context.Weapons.Any(w => w.TypeId == id))
+            {
+                return RedirectToAction("Index", "Weapons", new { typeId = id, name = weaponType.Name});
+            }
+
             return View(weaponType);
         }
 

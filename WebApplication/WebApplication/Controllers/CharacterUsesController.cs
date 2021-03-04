@@ -46,10 +46,10 @@ namespace WebApplication.Controllers
         }
 
         // GET: CharacterUses/Create
-        public IActionResult Create()
+        public IActionResult Create(int? characId, int? weapId)
         {
-            ViewData["CharacterId"] = new SelectList(_context.Characters, "Id", "Name");
-            ViewData["WeaponId"] = new SelectList(_context.Weapons, "Id", "Model");
+            ViewData["CharacterId"] = new SelectList(_context.Characters.Where(c => c.Id == characId), "Id", "Name");
+            ViewData["WeaponId"] = new SelectList(_context.Weapons.Where(w => w.Id == weapId), "Id", "Model");
             return View();
         }
 
@@ -58,7 +58,7 @@ namespace WebApplication.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,CharacterId,WeaponId")] CharacterUse characterUse)
+        public async Task<IActionResult> Create(int? characId, int? weapId, [Bind("Id,CharacterId,WeaponId")] CharacterUse characterUse)
         {
             if (ModelState.IsValid)
             {
@@ -66,8 +66,8 @@ namespace WebApplication.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["CharacterId"] = new SelectList(_context.Characters, "Id", "Name", characterUse.CharacterId);
-            ViewData["WeaponId"] = new SelectList(_context.Weapons, "Id", "Model", characterUse.WeaponId);
+            ViewData["CharacterId"] = new SelectList(_context.Characters.Where(c => c.Id == characId), "Id", "Name", characterUse.CharacterId);
+            ViewData["WeaponId"] = new SelectList(_context.Weapons.Where(w => w.Id == weapId), "Id", "Model", characterUse.WeaponId);
             return View(characterUse);
         }
 

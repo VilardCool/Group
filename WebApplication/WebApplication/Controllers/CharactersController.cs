@@ -18,10 +18,13 @@ namespace WebApplication.Controllers
             _context = context;
         }
 
+        static int? playerId = null;
+
         // GET: Characters
         public async Task<IActionResult> Index(int? id)
         {
             if (id == null) return View(await _context.Characters.ToListAsync());
+            playerId = id;
             return View(await _context.Characters.Include(c => c.CharacterChooses).Where(c => c.CharacterChooses.Any(p => p.PlayerId == id)).ToListAsync());
         }
 
@@ -60,6 +63,7 @@ namespace WebApplication.Controllers
             {
                 _context.Add(character);
                 await _context.SaveChangesAsync();
+                if (playerId != null && character.Playable == 1) { int? playId = playerId; playerId = null; return RedirectToAction("Create", "CharacterChooses", new { playerId = playId, charId = character.Id }); }
                 return RedirectToAction(nameof(Index));
             }
             return View(character);
@@ -129,6 +133,26 @@ namespace WebApplication.Controllers
             if (character == null)
             {
                 return NotFound();
+            }
+
+            if(_context.CharacterChooses.Any(p => p.CharacterId == id))
+            {
+                return RedirectToAction("Index", "CharacterChooses");
+            }
+
+            if (_context.CharacterUses.Any(p => p.CharacterId == id))
+            {
+                return RedirectToAction("Index", "CharacterUses");
+            }
+
+            if (_context.CharacterLocations.Any(p => p.CharacterId == id))
+            {
+                return RedirectToAction("Index", "CharacterLocations");
+            }
+
+            if (_context.Comunications.Any(p => p.Character1Id == id || p.Character2Id == id))
+            {
+                return RedirectToAction("Index", "Comunications");
             }
 
             return View(character);

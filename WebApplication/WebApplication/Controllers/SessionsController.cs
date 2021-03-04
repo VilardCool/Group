@@ -137,6 +137,11 @@ namespace WebApplication.Controllers
                 return NotFound();
             }
 
+            if (_context.Players.Any(p => p.SessionId == id))
+            {
+                return RedirectToAction("Index", "Players", new { id = id, server = session.Server});
+            }
+
             return View(session);
         }
 

@@ -7,7 +7,7 @@
 <h1>Зброя за типом @ViewBag.WeaponTypeName</h1>
 
 <p>
-    @Html.ActionLink("Додати нову зброю", "Create", new {weaponTypeId = @ViewBag.WeaponTypeId})
+    @Html.ActionLink("Додати нову зброю", "Create", new {weaponTypeId = @ViewBag.WeaponTypeId, characterId = @ViewBag.CharacterId})
 </p>
 <table class="table">
     <thead>

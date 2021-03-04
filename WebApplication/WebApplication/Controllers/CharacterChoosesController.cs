@@ -46,8 +46,14 @@ namespace WebApplication.Controllers
         }
 
         // GET: CharacterChooses/Create
-        public IActionResult Create()
+        public IActionResult Create(int? playerId, int? charId)
         {
+            if (playerId != null)
+            {
+                ViewData["CharacterId"] = new SelectList(_context.Characters.Where(c => c.Id == charId), "Id", "Name");
+                ViewData["PlayerId"] = new SelectList(_context.Players.Where(p => p.Id == playerId), "Id", "Nickname");
+                return View();
+            }
             ViewData["CharacterId"] = new SelectList(_context.Characters.Where(c => c.Playable == 1), "Id", "Name");
             ViewData["PlayerId"] = new SelectList(_context.Players, "Id", "Nickname");
             return View();

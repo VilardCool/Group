@@ -7,7 +7,7 @@
 <h1>Персонажі</h1>
 
 <p>
-    <a asp-action="Create">Створити персонажа</a>
+    @Html.ActionLink("Створити персонажа", "Create", new { playerId = @ViewBag.PlayerId })
 </p>
 <table class="table">
     <thead>

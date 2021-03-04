@@ -130,6 +130,16 @@ namespace WebApplication.Controllers
                 return NotFound();
             }
 
+            if(_context.Sessions.Any(s => s.MapId == id))
+            {
+                return RedirectToAction("Index", "Sessions", new { id = id});
+            }
+
+            if (_context.CharacterLocations.Any(s => s.MapId == id))
+            {
+                return RedirectToAction("Index", "CharacterLocations");
+            }
+
             return View(map);
         }
 

@@ -48,11 +48,15 @@ namespace WebApplication.Controllers
         }
 
         // GET: Players/Create
-        public IActionResult Create(int sessionId)
+        public IActionResult Create(int? sessionId)
         {
-            //ViewData["SessionId"] = new SelectList(_context.Sessions, "Id", "Server");
-            ViewBag.SessionId = sessionId;
-            ViewBag.SessionServer = _context.Sessions.Where(s => s.Id == sessionId).FirstOrDefault().Server;
+            if (sessionId == null) ViewData["SessionId"] = new SelectList(_context.Sessions, "Id", "Server");
+            else
+            {
+                ViewBag.SessionId = sessionId;
+                ViewBag.SessionServer = _context.Sessions.Where(s => s.Id == sessionId).FirstOrDefault().Server;
+                ViewData["SessionId"] = new SelectList(_context.Sessions.Where(s => s.Id == sessionId), "Id", "Server");
+            }
             return View();
         }
 
@@ -61,7 +65,7 @@ namespace WebApplication.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(int sessionId, [Bind("Id,Login,Password,Nickname,SessionId")] Player player)
+        public async Task<IActionResult> Create(int? sessionId, [Bind("Id,Login,Password,Nickname,SessionId")] Player player)
         {
             if (ModelState.IsValid)
             {
@@ -139,6 +143,11 @@ namespace WebApplication.Controllers
             if (player == null)
             {
                 return NotFound();
+            }
+
+            if (_context.CharacterChooses.Any(c => c.PlayerId == id))
+            {
+                return RedirectToAction("Index", "CharacterChooses");
             }
 
             return View(player);

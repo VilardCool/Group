@@ -48,8 +48,10 @@ namespace WebApplication.Controllers
         // GET: CharacterUses/Create
         public IActionResult Create(int? characId, int? weapId)
         {
-            ViewData["CharacterId"] = new SelectList(_context.Characters.Where(c => c.Id == characId), "Id", "Name");
-            ViewData["WeaponId"] = new SelectList(_context.Weapons.Where(w => w.Id == weapId), "Id", "Model");
+            if (characId == null) ViewData["CharacterId"] = new SelectList(_context.Characters, "Id", "Name");
+            else ViewData["CharacterId"] = new SelectList(_context.Characters.Where(c => c.Id == characId), "Id", "Name");
+            if (weapId == null) ViewData["WeaponId"] = new SelectList(_context.Weapons, "Id", "Model");
+            else ViewData["WeaponId"] = new SelectList(_context.Weapons.Where(w => w.Id == weapId), "Id", "Model");
             return View();
         }
 

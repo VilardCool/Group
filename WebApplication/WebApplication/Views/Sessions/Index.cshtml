@@ -9,6 +9,24 @@
 <p>
     <a asp-action="Create">Створити сесію</a>
 </p>
+
+<div>
+    <h5><pre>Оберіть exel-файл для заватаження          Завантаження інформації в файл</pre></h5>
+    @using (Html.BeginForm("Import", "Sessions", FormMethod.Post, new { enctype = "multipart/form-data", id = "frm-excel" }))
+    {
+    <div>
+        <input type="file" name="fileExcel" id="fileExcel" style="margin-right: 20%" />
+        <!--<button style="display:block;width:120px; height:30px;" onclick="document.getElementById('getFile').click()">Оберіть файл</button>
+        <input type='file' id="getFile" style="display:none">-->
+        <button asp-action="Export">Завантажити</button>
+        <div>
+            <input type="submit" value="Імпортувати" />
+        </div>
+    </div>
+    }
+</div>
+<br>
+
 <table class="table">
     <thead>
         <tr>
@@ -25,23 +43,24 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Server)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Duration)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Map.Name)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Server)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Duration)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Map.Name)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>

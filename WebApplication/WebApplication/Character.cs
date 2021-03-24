@@ -21,8 +21,7 @@ namespace WebApplication
         [Required(ErrorMessage = "Поле не повинно бути порожнім та значення має бути 0 фбо 1")]
         [Display(Name = "Ігровий")]
         [Range(0,1, ErrorMessage = "Значення має бути 0 або 1")]
-        public int Playable { get { return play; } set { if (value != 0) play = 1; else play = 0; } }
-        private int play;
+        public int Playable { get; set; }
         [Required(ErrorMessage = "Поле не повинно бути порожнім та має бути не більше 10 символів")]
         [Display(Name = "Ім'я")]
         [StringLength(10, ErrorMessage = "Має бути не більше 10 символів")]

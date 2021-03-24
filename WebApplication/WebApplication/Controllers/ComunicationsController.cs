@@ -49,7 +49,7 @@ namespace WebApplication.Controllers
         public IActionResult Create()
         {
             ViewData["Character1Id"] = new SelectList(_context.Characters, "Id", "Name");
-            ViewData["Character2Id"] = new SelectList(_context.Characters, "Id", "Name");
+            ViewData["Character2Id"] = new SelectList(_context.Characters.Where(c => c.Id != _context.Characters.First().Id), "Id", "Name");
             return View();
         }
 

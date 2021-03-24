@@ -215,3 +215,7 @@ C:\Users\VBGch\Documents\Code\IS\WebApplication\WebApplication\obj\Debug\net5.0\
 C:\Users\VBGch\Documents\Code\IS\WebApplication\WebApplication\obj\Debug\net5.0\Razor\Views\Comunications\Details.cshtml.g.cs
 C:\Users\VBGch\Documents\Code\IS\WebApplication\WebApplication\obj\Debug\net5.0\Razor\Views\Comunications\Edit.cshtml.g.cs
 C:\Users\VBGch\Documents\Code\IS\WebApplication\WebApplication\obj\Debug\net5.0\Razor\Views\Comunications\Index.cshtml.g.cs
+C:\Users\VBGch\Documents\Code\IS\WebApplication\WebApplication\bin\Debug\net5.0\ClosedXML.dll
+C:\Users\VBGch\Documents\Code\IS\WebApplication\WebApplication\bin\Debug\net5.0\DocumentFormat.OpenXml.dll
+C:\Users\VBGch\Documents\Code\IS\WebApplication\WebApplication\bin\Debug\net5.0\ExcelNumberFormat.dll
+C:\Users\VBGch\Documents\Code\IS\WebApplication\WebApplication\bin\Debug\net5.0\System.IO.Packaging.dll

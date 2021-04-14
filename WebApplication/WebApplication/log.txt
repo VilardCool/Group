@@ -1,0 +1,3 @@
+System.IndexOutOfRangeException: Index was outside the bounds of the array.
+   at WebApplication.Controllers.SessionsController.ImportDOC(IFormFile fileWord) in C:\Users\VBGch\Documents\Code\IS\WebApplication\WebApplication\Controllers\SessionsController.cs:line 341System.IndexOutOfRangeException: Index was outside the bounds of the array.
+   at WebApplication.Controllers.SessionsController.ImportDOC(IFormFile fileWord) in C:\Users\VBGch\Documents\Code\IS\WebApplication\WebApplication\Controllers\SessionsController.cs:line 341

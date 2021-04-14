@@ -34,15 +34,19 @@
                         <li class="nav-item dropdown">
                             <a class="nav-link text-dark dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">CharacterInteraction</a>
                             <div class="dropdown-menu">
-                                <a class="dropdown-item" asp-area="" asp-controller="CharacterChooses" asp-action="Index">CharacterChoose</a>
-                                <a class="dropdown-item" asp-area="" asp-controller="CharacterLocations" asp-action="Index">CharacterLocation</a>
-                                <a class="dropdown-item" asp-area="" asp-controller="CharacterUses" asp-action="Index">CharacterUse</a>
+                                @if (User.IsInRole("admin") || User.IsInRole("user"))
+                                {
+                                    <a class="dropdown-item" asp-area="" asp-controller="CharacterChooses" asp-action="Index">CharacterChoose</a>
+                                    <a class="dropdown-item" asp-area="" asp-controller="CharacterLocations" asp-action="Index">CharacterLocation</a>
+                                    <a class="dropdown-item" asp-area="" asp-controller="CharacterUses" asp-action="Index">CharacterUse</a>
+                                }
                                 <a class="dropdown-item" asp-area="" asp-controller="Comunications" asp-action="Index">Comunication</a>
                             </div>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="WeaponTypes" asp-action="Index">Weapons</a>
                         </li>
+                        <p style="margin-left: 40%">@User.Identity.Name</p>
                     </ul>
                 </div>
             </div>

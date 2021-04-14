@@ -6,6 +6,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace WebApplication
 {
+
     public partial class Player
     {
         public Player()

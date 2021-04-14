@@ -11,18 +11,48 @@
 </p>
 
 <div>
-    <h5><pre>Оберіть exel-файл для заватаження          Завантаження інформації в файл</pre></h5>
+    <h5><pre>Оберіть excel-файл для заватаження         Завантаження інформації в excel-файл</pre></h5>
     @using (Html.BeginForm("Import", "Sessions", FormMethod.Post, new { enctype = "multipart/form-data", id = "frm-excel" }))
     {
-    <div>
-        <input type="file" name="fileExcel" id="fileExcel" style="margin-right: 20%" />
-        <!--<button style="display:block;width:120px; height:30px;" onclick="document.getElementById('getFile').click()">Оберіть файл</button>
-        <input type='file' id="getFile" style="display:none">-->
-        <button asp-action="Export">Завантажити</button>
         <div>
-            <input type="submit" value="Імпортувати" />
+            <div class="upload_form">
+
+                <label>
+
+                    <input type="file" name="fileExcel" id="fileExcel" class="main_input_file" style="display:none;" />
+                    <div style=" width: 100px; height: 32px; background: #f2f2f2; border-radius: 4px; color: #000; text-align: center; line-height: 32px; font-family: arial; font-size: 14px; display: inline-block; vertical-align: top;">Обрати файл</div>
+                    <input class="f_name" type="text" id="f_name" value="Файл не обрано" disabled />
+
+                </label>
+
+                <button asp-action="Export" style="margin-left: 20%">Завантажити</button>
+            </div>
+            <div>
+                <input type="submit" value="Імпортувати" />
+            </div>
         </div>
-    </div>
+    }
+</div>
+
+<div>
+    <h5><pre>Оберіть word-файл для заватаження          Завантаження інформації у word-файл</pre></h5>
+    @using (Html.BeginForm("ImportDOC", "Sessions", FormMethod.Post, new { enctype = "multipart/form-data", id = "frm-word" }))
+    {
+        <div>
+            <div class="upload_form1">
+                <label>
+
+                    <input type="file" name="fileWord" id="fileWord" class="main_input_file1" style="display:none;" />
+                    <div style=" width: 100px; height: 32px; background: #f2f2f2; border-radius: 4px; color: #000; text-align: center; line-height: 32px; font-family: arial; font-size: 14px; display: inline-block; vertical-align: top;">Обрати файл</div>
+                    <input class="f_name1" type="text" id="f_name1" value="Файл не обрано" disabled />
+
+                </label>
+                <button asp-action="ExportDOC" style="margin-left: 20%">Завантажити</button>
+            </div>
+            <div>
+                <input type="submit" value="Імпортувати" />
+            </div>
+        </div>
     }
 </div>
 <br>
@@ -64,3 +94,47 @@
         }
     </tbody>
 </table>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script>
+
+    $(document).ready(function () {
+
+        $(".main_input_file").change(function () {
+
+            var f_name = [];
+
+            for (var i = 0; i < $(this).get(0).files.length; ++i) {
+
+                f_name.push(" " + $(this).get(0).files[i].name);
+
+            }
+
+            $("#f_name").val(f_name.join(", "));
+        });
+
+    });
+
+</script>
+
+<script>
+
+    $(document).ready(function () {
+
+        $(".main_input_file1").change(function () {
+
+            var f_name1 = [];
+
+            for (var i = 0; i < $(this).get(0).files.length; ++i) {
+
+                f_name1.push(" " + $(this).get(0).files[i].name);
+
+            }
+
+            $("#f_name1").val(f_name1.join(", "));
+        });
+
+    });
+
+</script>
+

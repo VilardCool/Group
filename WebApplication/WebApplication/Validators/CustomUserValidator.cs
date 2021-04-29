@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Identity;
 
 namespace WebApplication.Models
 {
-    public class CustomUserValidator : IUserValidator<User>
+    public class CustomUserValidator<TUser> : IUserValidator<User>
     {
         public Task<IdentityResult> ValidateAsync(UserManager<User> manager, User user)
         {

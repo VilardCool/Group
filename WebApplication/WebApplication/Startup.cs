@@ -25,7 +25,6 @@ namespace WebApplication
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddTransient<IUserValidator<User>, CustomUserValidator>();
 
             string connection = Configuration.GetConnectionString("DefaultConnection");
             services.AddDbContext<GameDBContext>(options => options.UseSqlServer(connection));
@@ -35,7 +34,6 @@ namespace WebApplication
 
             services.AddIdentity<User, IdentityRole>(opts => {
                 opts.User.RequireUniqueEmail = true;
-                opts.User.AllowedUserNameCharacters = ".@abcdefghijklmnopqrstuvwxyz";
                 opts.Password.RequiredLength = 6;
                 opts.Password.RequireNonAlphanumeric = false;
                 opts.Password.RequireLowercase = false;
@@ -43,7 +41,8 @@ namespace WebApplication
                 opts.Password.RequireDigit = false;
             })
             .AddEntityFrameworkStores<IdentityContext>()
-            .AddDefaultTokenProviders();
+            .AddDefaultTokenProviders()
+            .AddUserValidator<CustomUserValidator<User>>();
 
             services.AddControllersWithViews();
         }

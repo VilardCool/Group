@@ -236,11 +236,4 @@ C:\Users\VBGch\Documents\Code\IS\WebApplication\WebApplication\obj\Debug\net5.0\
 C:\Users\VBGch\Documents\Code\IS\WebApplication\WebApplication\bin\Debug\net5.0\MailKit.dll
 C:\Users\VBGch\Documents\Code\IS\WebApplication\WebApplication\bin\Debug\net5.0\MimeKit.dll
 C:\Users\VBGch\Documents\Code\IS\WebApplication\WebApplication\bin\Debug\net5.0\BouncyCastle.Crypto.dll
-C:\Users\VBGch\Documents\Code\IS\WebApplication\WebApplication\bin\Debug\net5.0\System.Web.Mvc.dll
-C:\Users\VBGch\Documents\Code\IS\WebApplication\WebApplication\bin\Debug\net5.0\System.Web.Razor.dll
-C:\Users\VBGch\Documents\Code\IS\WebApplication\WebApplication\bin\Debug\net5.0\System.Web.Helpers.dll
-C:\Users\VBGch\Documents\Code\IS\WebApplication\WebApplication\bin\Debug\net5.0\System.Web.WebPages.Deployment.dll
-C:\Users\VBGch\Documents\Code\IS\WebApplication\WebApplication\bin\Debug\net5.0\System.Web.WebPages.Razor.dll
-C:\Users\VBGch\Documents\Code\IS\WebApplication\WebApplication\bin\Debug\net5.0\System.Web.WebPages.dll
-C:\Users\VBGch\Documents\Code\IS\WebApplication\WebApplication\bin\Debug\net5.0\Microsoft.Web.Infrastructure.dll
 C:\Users\VBGch\Documents\Code\IS\WebApplication\WebApplication\obj\Debug\net5.0\Razor\Views\Roles\Create.cshtml.g.cs

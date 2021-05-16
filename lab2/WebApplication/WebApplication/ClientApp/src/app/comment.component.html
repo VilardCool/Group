@@ -1,0 +1,48 @@
+﻿<a href="">Game</a>
+<h1>Список коментарів</h1>
+<input type="button" value="Додати" class="btn btn-default" (click)="add()" />
+<table *ngIf="tableMode; else create" class="table table-striped">
+    <thead>
+        <tr>
+            <td>Вміст</td>
+            <td>Кількість лайків</td>
+            <td></td>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let p of comments">
+            <ng-template [ngIf]="comment?.id != p.id" [ngIfElse]="edit">
+                <td>{{p?.content}}</td>
+                <td>{{p?.amountOfLikes}}</td>
+                <td>
+                    <button class="btn btn-sm btn-primary" (click)="likeComment(p)">Лайк</button>
+                    <button class="btn btn-sm btn-primary" (click)="editComment(p)">Змінити</button>
+                    <button class="btn btn-sm btn-danger" (click)="delete(p)">Видалити</button>
+                </td>
+            </ng-template>
+        </tr>
+    </tbody>
+</table>
+
+<!--шаблон для редактирования-->
+<ng-template #edit>
+    <td>
+        <input type="text" [(ngModel)]="comment.content" class="form-control" />
+    </td>
+    <td>
+        <input type="button" value="Сохранить" (click)="save()" class="btn btn-sm btn-success" />
+        <!--<input type="button" value="Отмена" (click)="cancel()" class="btn btn-sm btn-warning" />-->
+    </td>
+</ng-template>
+
+<!--шаблон для добавления-->
+<ng-template #create>
+    <div class="form-group">
+        <label>Вміст</label>
+        <input type="text" [(ngModel)]="comment.content" class="form-control" />
+    </div>
+    <div>
+        <input type="button" value="Сохранить" (click)="save()" class="btn btn-success" />
+        <input type="button" value="Отмена" (click)="cancel()" class="btn btn-warning" />
+    </div>
+</ng-template>

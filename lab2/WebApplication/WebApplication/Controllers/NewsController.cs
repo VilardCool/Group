@@ -13,9 +13,9 @@ namespace WebApplication.Controllers
     [ApiController]
     public class NewsController : ControllerBase
     {
-        private readonly SiteContext _context;
+        private readonly ApplicationContext _context;
 
-        public NewsController(SiteContext context)
+        public NewsController(ApplicationContext context)
         {
             _context = context;
         }

@@ -1,0 +1,57 @@
+﻿<a href="./comment">Comment</a>
+    <h1>Список ігор</h1>
+    <input type="button" value="Додати" class="btn btn-default" (click)="addGame()" />
+    <table *ngIf="tableModeGame; else create" class="table table-striped">
+        <thead>
+            <tr>
+                <td>Назва</td>
+                <td>Опис</td>
+                <td>Кількість лайків</td>
+                <td></td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let g of games">
+                <ng-template [ngIf]="game?.id != g.id" [ngIfElse]="edit">
+                    <td>{{g?.title}}</td>
+                    <td>{{g?.content}}</td>
+                    <td>{{g?.amountOfLikes}}</td>
+                    <td>
+                        <button class="btn btn-sm btn-primary" (click)="likeGame(g)">Лайк</button>
+                        <button class="btn btn-sm btn-primary" (click)="editGame(g)">Змінити</button>
+                        <button class="btn btn-sm btn-danger" (click)="deleteGame(g)">Видалити</button>
+                    </td>
+                </ng-template>
+            </tr>
+        </tbody>
+    </table>
+
+    <!--шаблон для редактирования-->
+    <ng-template #edit>
+        <td>
+            <input type="text" [(ngModel)]="game.title" class="form-control" />
+        </td>
+        <td>
+            <input type="text" [(ngModel)]="game.content" class="form-control" />
+        </td>
+        <td>
+            <input type="button" value="Сохранить" (click)="saveGame()" class="btn btn-sm btn-success" />
+            <!--<input type="button" value="Отмена" (click)="cancelGame()" class="btn btn-sm btn-warning" />-->
+        </td>
+    </ng-template>
+
+    <!--шаблон для добавления-->
+    <ng-template #create>
+        <div class="form-group">
+            <label>Назва</label>
+            <input type="text" [(ngModel)]="game.title" class="form-control" />
+        </div>
+        <div class="form-group">
+            <label>Опис</label>
+            <input type="text" [(ngModel)]="game.content" class="form-control" />
+        </div>
+        <div>
+            <input type="button" value="Сохранить" (click)="saveGame()" class="btn btn-success" />
+            <input type="button" value="Отмена" (click)="cancelGame()" class="btn btn-warning" />
+        </div>
+    </ng-template>

@@ -21,6 +21,9 @@ public class Main implements AM
 		} catch (IOException e1) {
 			e1.printStackTrace();
 		}
+		
+		long startTime = System.nanoTime();
+		
 		int w = originalImage.getWidth();
 		int h = originalImage.getHeight();
 		System.out.println("Image width:\t" + w);
@@ -29,7 +32,6 @@ public class Main implements AM
 		Graphics2D g = kmeansImage.createGraphics();
 		g.drawImage(originalImage, 0, 0, w, h, null);
 		
-		// Read rgb values from the image
 		int[] rgb = new int[w * h];
 		int count = 0;
 		for (int i = 0; i < w; i++) {
@@ -58,14 +60,18 @@ public class Main implements AM
         System.arraycopy(rgb1res, 0, rgb, 0, rgb1res.length);  
         System.arraycopy(rgb2res, 0, rgb, rgb1res.length, rgb2res.length);    
 	
-	    System.out.println("Result found.");
+	System.out.println("Result found.");
 	    
-	    count = 0;
-	    for (int i = 0; i < w; i++) {
-			for (int j = 0; j < h; j++) {
-				kmeansImage.setRGB(i, j, rgb[count++]);
-			}
+	count = 0;
+	for (int i = 0; i < w; i++) {
+		for (int j = 0; j < h; j++) {
+			kmeansImage.setRGB(i, j, rgb[count++]);
 		}
+	}
+		
+	long endTime = System.nanoTime();
+
+	System.out.println("Time: " + (endTime - startTime)/1000000 + " milliseconds");
 
 	    try{
 	  	  ImageIO.write(kmeansImage, "jpg", new File("Res.jpg"));

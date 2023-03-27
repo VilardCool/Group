@@ -5,6 +5,7 @@ public class KMeans implements AM
 {
 	public void run(AMInfo info){
 		int k = 10;
+		
 		int[] rgb = (int[]) info.parent.readObject();
 		
 		int[] k_values = new int[k];
@@ -31,7 +32,6 @@ public class KMeans implements AM
 			System.out.println("Inital k mean " + i + ": " + k_values[i]);
 		}
 		
-		int[] pixel_assignments = new int[rgb.length];
 		int[] num_assignments = new int[k];
 		
 		int[] alpha_sum = new int[k];
@@ -67,7 +67,7 @@ public class KMeans implements AM
 						cluster_index = j;
 					}
 				}
-				pixel_assignments[i] = cluster_index;
+
 				num_assignments[cluster_index]++;
 
 				alpha_sum[cluster_index] += getAlpha(rgb[i]);
@@ -88,16 +88,12 @@ public class KMeans implements AM
 			num_iterations++;
 		}
 		
-		for (int i = 0; i < rgb.length; i++) {
-			rgb[i] = k_values[pixel_assignments[i]];
-		}
-		
 		System.out.println("Clustering image converged.");
 		for (int i = 0; i < k_values.length; i++) {
 			System.out.println("Final k mean " + i + ": " + k_values[i]);
 		}
 		
-		info.parent.write(rgb);
+		info.parent.write(k_values);
 	}
 	
 	public static int getRed(int pix) {return (pix >> 16) & 0xFF;}

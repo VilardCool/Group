@@ -5,7 +5,7 @@ public class KMeans implements AM
 {
 	public void run(AMInfo info){
 		int k = 10;
-		int[] rgb = (int[]) info.parent.readObject();;
+		int[] rgb = (int[]) info.parent.readObject();
 		
 		int[] k_values = new int[k];
 		Random rand = new Random();

@@ -55,8 +55,6 @@ public class Main implements AM
         int[] rgb1res = (int[]) c1.readObject();
         int[] rgb2res = (int[]) c2.readObject();
         
-        System.out.println("First array length: "+rgb1res.length);
-        
         System.arraycopy(rgb1res, 0, rgb, 0, rgb1res.length);  
         System.arraycopy(rgb2res, 0, rgb, rgb1res.length, rgb2res.length);    
 	

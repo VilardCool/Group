@@ -52,13 +52,13 @@ public class Main implements AM
         c2.write(rgb2);
         
         System.out.println("Waiting for result...");
-        rgb1=(int[]) c1.readObject();
-        rgb2=(int[]) c2.readObject();
+        int[] rgb1res = (int[]) c1.readObject();
+        int[] rgb2res = (int[]) c2.readObject();
         
-        System.out.println(rgb1.length);
+        System.out.println("First array length: "+rgb1res.length);
         
-        System.arraycopy(rgb1, 0, rgb, 0, rgb1.length);  
-        System.arraycopy(rgb2, 0, rgb, rgb1.length, rgb2.length);  
+        System.arraycopy(rgb1res, 0, rgb, 0, rgb1res.length);  
+        System.arraycopy(rgb2res, 0, rgb, rgb1res.length, rgb2res.length);    
 	
 	    System.out.println("Result found.");
 	    

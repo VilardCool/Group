@@ -9,7 +9,7 @@ public class Main implements AM
 {
     public static void main(String[] args) {
         task curtask = new task();
-        curtask.addJarFile("KMeans.jar");
+        curtask.addJarFile("Main.jar");
         (new Main()).run(new AMInfo(curtask, (channel)null));
         curtask.end();
     }

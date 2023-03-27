@@ -55,8 +55,10 @@ public class Main implements AM
         rgb1=(int[]) c1.readObject();
         rgb2=(int[]) c2.readObject();
         
-        rgb = Arrays.copyOf(rgb1, rgb1.length + rgb2.length);
-        System.arraycopy(rgb2, 0, rgb, rgb1.length, rgb2.length);
+        System.out.println(rgb1.length);
+        
+        System.arraycopy(rgb1, 0, rgb, 0, rgb1.length);  
+        System.arraycopy(rgb2, 0, rgb, rgb1.length, rgb2.length);  
 	
 	    System.out.println("Result found.");
 	    

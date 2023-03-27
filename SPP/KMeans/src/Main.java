@@ -54,27 +54,54 @@ public class Main implements AM
         c2.write(rgb2);
         
         System.out.println("Waiting for result...");
-        int[] rgb1res = (int[]) c1.readObject();
-        int[] rgb2res = (int[]) c2.readObject();
+        int[] k_values1 = (int[]) c1.readObject();
+        int[] k_values2 = (int[]) c2.readObject();
+        int[] k_values = new int[k_values1.length + k_values2.length];
         
-        System.arraycopy(rgb1res, 0, rgb, 0, rgb1res.length);  
-        System.arraycopy(rgb2res, 0, rgb, rgb1res.length, rgb2res.length);    
+        System.arraycopy(k_values1, 0, k_values, 0, k_values1.length);  
+        System.arraycopy(k_values2, 0, k_values, k_values1.length, k_values2.length);
+        
+        for (int i = 0; i < rgb.length; i++) {
+			double min_dist = Double.MAX_VALUE;
+			int cluster_index = 0;
+			for (int j = 0; j < k_values.length; j++) {
+				int a_dist = (getAlpha(rgb[i]) - getAlpha(k_values[j]));
+				int r_dist = (getRed(rgb[i]) - getRed(k_values[j]));
+				int g_dist = (getGreen(rgb[i]) - getGreen(k_values[j]));
+				int b_dist = (getBlue(rgb[i]) - getBlue(k_values[j]));
+				double dist = Math.sqrt(a_dist * a_dist + r_dist * r_dist + g_dist * g_dist + b_dist * b_dist);
+				if (dist < min_dist) {
+					min_dist = dist;
+					cluster_index = j;
+				}
+			}
+			
+			rgb[i] = k_values[cluster_index];
+        }
 	
-	System.out.println("Result found.");
+	    System.out.println("Result found.");
 	    
-	count = 0;
-	for (int i = 0; i < w; i++) {
-		for (int j = 0; j < h; j++) {
-			kmeansImage.setRGB(i, j, rgb[count++]);
+	    count = 0;
+	    for (int i = 0; i < w; i++) {
+			for (int j = 0; j < h; j++) {
+				kmeansImage.setRGB(i, j, rgb[count++]);
+			}
 		}
-	}
-		
-	long endTime = System.nanoTime();
+	    
+	    long endTime = System.nanoTime();
 
-	System.out.println("Time: " + (endTime - startTime)/1000000 + " milliseconds");
+		System.out.println("Time: " + (endTime - startTime)/1000000 + " milliseconds");
 
 	    try{
 	  	  ImageIO.write(kmeansImage, "jpg", new File("Res.jpg"));
 	    } catch (IOException e) {e.printStackTrace(); return;}
     }
+    
+	public static int getRed(int pix) {return (pix >> 16) & 0xFF;}
+	
+	public static int getGreen(int pix) {return (pix >> 8) & 0xFF;}
+	
+	public static int getBlue(int pix) {return pix & 0xFF;}
+	
+	public static int getAlpha(int pix) {return (pix >> 24) & 0xFF;}
 }

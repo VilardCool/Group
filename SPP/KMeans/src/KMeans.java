@@ -115,6 +115,8 @@ public class KMeans implements AM
 		for (int i = 0; i < k_values.length; i++) {
 			System.out.println("Final k mean " + i + ": " + k_values[i]);
 		}
+		
+		info.parent.write(rgb);
 	}
 	
 	// HELPER FUNCTIONS - to get individual R, G, and B values

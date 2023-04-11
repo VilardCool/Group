@@ -1,40 +1,40 @@
-from telegram.ext import Updater, CommandHandler, MessageHandler, filters
-import requests
-from config import BOT_TOKEN
+from googleapiclient.discovery import build
+from telegram import ForceReply, Update
+from telegram.ext import Application, CommandHandler, ContextTypes
+from config import BOT_TOKEN, API_TOKEN
+ 
+API_KEY = API_TOKEN
+ 
+def get_service():
+    service = build('youtube', 'v3', developerKey=API_KEY)
+    return service
 
-def movie_handler(update, context):
-    id = int(update.message.from_user.id)
+async def start(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
+    user = update.effective_user
+    await update.message.reply_html(
+        rf"Hi {user.mention_html()}!",
+        reply_markup=ForceReply(selective=True),
+    )
 
-    print(id)
-    first_name = update.message.chat.first_name
-    opening_line = f"""Hi {first_name}!"""
-    update.message.reply_text(opening_line)
+async def get_channel_info(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
+    channel = update.message.text[9:]
+    r = get_service().channels().list(forUsername=channel, part='snippet,statistics').execute()
+    if r["pageInfo"]["totalResults"] == 0:
+        await update.message.reply_text('Channel not found')
+        return
+    else:
+        await update.message.reply_text(channel + ' channel was created: ' + r['items'][0]['snippet']['publishedAt'] + 
+                                        '\nViews: ' + r['items'][0]['statistics']['viewCount'] + 
+                                        '\nSubscribers: ' + r['items'][0]['statistics']['subscriberCount'] + 
+                                        '\nVideos: ' + r['items'][0]['statistics']['videoCount'])
 
-    chat_id = update.message.chat_id
+def main() -> None:
+    application = Application.builder().token(BOT_TOKEN).build()
 
-    movie_name = update.message.text[7:].strip()
+    application.add_handler(CommandHandler("start", start))
+    application.add_handler(CommandHandler("channel", get_channel_info))
 
-    context.bot.send_message(chat_id=chat_id, text="No movie available for this title: " + movie_name)
-
-async def help_command(update, context):
-    await update.message.reply_text("Help!")
-
-async def echo(update, context):
-    await update.message.reply_text(update.message.text)
-
-
-def main():
-    updater = Updater(BOT_TOKEN, use_context=True)
-    dispatcher = updater.dispatcher
-
-    dispatcher.add_handler(CommandHandler("movie", movie_handler))
-
-    dispatcher.add_handler(CommandHandler("help", help_command))
-
-    dispatcher.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, echo))
-
-    updater.start_polling()
-    updater.idle()
+    application.run_polling()
 
 
 if __name__ == "__main__":

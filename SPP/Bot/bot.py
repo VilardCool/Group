@@ -79,9 +79,9 @@ async def get_most_liked_video(update: Update, context: ContextTypes.DEFAULT_TYP
 
     await update.message.reply_text('Most liked video: ' + VideoTitle[mli] +
                                     '\nWith ' + str(ml) + ' likes' +
-                                    '\nAnd ' + str(Views[i]) + ' views' +
-                                    '\nWas published: ' + Published[i] +
-                                    '\n' + url[i])
+                                    '\nAnd ' + str(Views[mli]) + ' views' +
+                                    '\nWas published: ' + Published[mli] +
+                                    '\n' + url[mli])
 
 def main() -> None:
     application = Application.builder().token(BOT_TOKEN).build()
